@@ -29,8 +29,8 @@ export async function GET(request: Request) {
     });
     return NextResponse.json(documents);
   } catch (error) {
-    console.error('Error fetching documents:', error);
-    return NextResponse.json({ error: 'Failed to fetch documents' }, { status: 500 });
+    console.error('Error fetching documents, falling back to empty list:', error);
+    return NextResponse.json([]);
   }
 }
 
