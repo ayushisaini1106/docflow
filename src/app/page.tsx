@@ -51,6 +51,10 @@ export default function Dashboard() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ ownerId: user.id }),
       });
+      if (!res.ok) {
+        alert("Live Vercel Preview is Read-Only. Please run locally (npm run dev) to test document creation!");
+        return;
+      }
       const data = await res.json();
       router.push(`/doc/${data.id}`);
     } catch (err) {
@@ -87,6 +91,10 @@ export default function Dashboard() {
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ ownerId: user.id, title, content }),
         });
+        if (!res.ok) {
+          alert("Live Vercel Preview is Read-Only. Please run locally (npm run dev) to test document creation!");
+          return;
+        }
         const data = await res.json();
         if (fileInputRef.current) fileInputRef.current.value = "";
         router.push(`/doc/${data.id}`);
